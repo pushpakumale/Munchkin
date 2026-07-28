@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Tiny Question ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(135deg,#ffd6e8,#ffeaf3,#fff7fb);
+
+overflow:hidden;
+
+}
+
+.card{
+
+width:90%;
+max-width:600px;
+
+background:rgba(255,255,255,.65);
+
+backdrop-filter:blur(15px);
+
+padding:45px;
+
+border-radius:30px;
+
+text-align:center;
+
+box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+animation:fade .8s;
+
+}
+
+h1{
+
+font-family:"Dancing Script",cursive;
+
+font-size:55px;
+
+color:#ff3f7d;
+
+margin-bottom:25px;
+
+}
+
+p{
+
+font-size:18px;
+
+line-height:1.8;
+
+margin-bottom:35px;
+
+color:#444;
+
+}
+
+.buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+button{
+
+padding:15px 35px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.yes{
+
+background:#ff5d94;
+
+color:white;
+
+}
+
+.no{
+
+background:white;
+
+color:#ff4d88;
+
+}
+
+button:hover{
+
+transform:translateY(-4px) scale(1.05);
+
+}
+
+#message{
+
+margin-top:35px;
+
+font-size:19px;
+
+line-height:1.8;
+
+display:none;
+
+animation:fade .8s;
+
+}
+
+#continue{
+
+display:none;
+
+margin-top:30px;
+
+background:#ff5d94;
+
+color:white;
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(25px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.heart{
+
+position:absolute;
+
+font-size:24px;
+
+animation:float 8s linear infinite;
+
+opacity:.7;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>One Tiny Question ❤️</h1>
+
+<p>
+
+Before we continue...
+
+I just wanted to ask something.
+
+How are you feeling today?
+
+</p>
+
+<div class="buttons">
+
+<button class="yes" onclick="happy()">
+😊 I'm doing good
+</button>
+
+<button class="no" onclick="tired()">
+😴 A little tired
+</button>
+
+</div>
+
+<div id="message"></div>
+
+<button id="continue" onclick="nextPage()">
+
+Continue ✨
+
+</button>
+
+</div>
+
+<script>
+
+const msg=document.getElementById("message");
+
+const next=document.getElementById("continue");
+
+function confetti(){
+
+for(let i=0;i<120;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML=["❤️","🌸","💖","✨"][Math.floor(Math.random()*4)];
+
+heart.className="heart";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},9000);
+
+}
+
+}
+
+function happy(){
+
+confetti();
+
+msg.style.display="block";
+
+next.style.display="inline-block";
+
+msg.innerHTML=`
+
+<h3 style="color:#ff4d88;margin-bottom:15px;">
+Yay! ❤️
+</h3>
+
+I'm really happy to hear that.
+
+I hope something today makes you smile even more.
+
+Thank you for spending a little bit of your time here.
+
+🌸
+
+`;
+
+}
+
+function tired(){
+
+confetti();
+
+msg.style.display="block";
+
+next.style.display="inline-block";
+
+msg.innerHTML=`
+
+<h3 style="color:#ff4d88;margin-bottom:15px;">
+Aww 🥺
+</h3>
+
+Then this little website has only one mission...
+
+To make your day just a tiny bit lighter.
+
+No expectations.
+
+No pressure.
+
+Just a smile.
+
+❤️
+
+`;
+
+}
+
+function nextPage(){
+
+window.location.href="thankyou.html";
+
+}
+
+</script>
+
+</body>
+</html>
