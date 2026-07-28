@@ -462,3 +462,31 @@ width:100%;
 }
 
 }
+
+/* Floating Compliment */
+
+@keyframes floatBubble{
+
+0%{
+
+transform:translateY(0);
+
+opacity:0;
+
+}
+
+10%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh);
+
+opacity:0;
+
+}
+
+}
