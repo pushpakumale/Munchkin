@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Letter ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(#ffdbe9,#ffeef5);
+
+overflow:hidden;
+
+transition:2s;
+
+}
+
+canvas{
+
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+
+}
+
+.container{
+
+text-align:center;
+
+width:90%;
+max-width:750px;
+
+}
+
+.envelope{
+
+font-size:120px;
+
+cursor:pointer;
+
+transition:.5s;
+
+animation:float 3s ease-in-out infinite;
+
+}
+
+.envelope:hover{
+
+transform:scale(1.1);
+
+}
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+}
+
+.card{
+
+display:none;
+
+margin-top:20px;
+
+padding:40px;
+
+background:white;
+
+border-radius:25px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+text-align:left;
+
+line-height:2;
+
+font-size:18px;
+
+position:relative;
+
+}
+
+h1{
+
+font-family:"Dancing Script",cursive;
+
+font-size:55px;
+
+text-align:center;
+
+color:#ff4d88;
+
+margin-bottom:30px;
+
+}
+
+#text{
+
+white-space:pre-line;
+
+min-height:260px;
+
+}
+
+button{
+
+margin-top:35px;
+
+padding:16px 40px;
+
+border:none;
+
+border-radius:40px;
+
+background:#ff4d88;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+display:none;
+
+}
+
+.music{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+background:white;
+
+padding:10px 16px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="music" onclick="toggleMusic()">
+
+🎵 Music
+
+</div>
+
+<audio id="bgm" loop>
+
+<source src="../assets/music.mp3">
+
+</audio>
+
+<div class="container">
+
+<div id="mail" class="envelope">
+
+💌
+
+</div>
+
+<div id="letter" class="card">
+
+<h1>Hi Munchkin ❤️</h1>
+
+<div id="text"></div>
+
+<button id="next">
+
+One More Thing ✨
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const envelope=document.getElementById("mail");
+const letter=document.getElementById("letter");
+const text=document.getElementById("text");
+const next=document.getElementById("next");
+
+const message=`I don't know how your day has been.
+
+Maybe work has been hectic.
+
+Maybe you're tired.
+
+Maybe today has simply been one of those long days.
+
+So...
+
+I made this little corner on the internet.
+
+Not because I expect anything in return.
+
+Not because I wanted answers.
+
+Just because...
+
+Sometimes people deserve a reason to smile.
+
+I hope you've been eating properly.
+
+I hope you're getting enough sleep.
+
+I hope work becomes a little easier.
+
+I hope something wonderful happens to you this week.
+
+Thank you for opening this.
+
+It genuinely made me happy knowing you spent a little time here.
+
+And if this managed to make you smile...
+
+Then this tiny project was completely worth it.
+
+Take care of yourself.
+
+Always.
+
+❤️`;
+
+let i=0;
+
+envelope.onclick=function(){
+
+envelope.style.display="none";
+
+letter.style.display="block";
+
+type();
+
+nightMode();
+
+}
+
+function type(){
+
+if(i<message.length){
+
+text.innerHTML+=message.charAt(i);
+
+i++;
+
+setTimeout(type,35);
+
+}
+
+else{
+
+next.style.display="inline-block";
+
+}
+
+}
+
+next.onclick=function(){
+
+window.location.href="compliments.html";
+
+}
+
+function nightMode(){
+
+setTimeout(()=>{
+
+document.body.style.background="linear-gradient(#0f172a,#1e293b,#111827)";
+
+document.body.style.color="white";
+
+letter.style.color="#333";
+
+createStars();
+
+},2500);
+
+}
+
+function createStars(){
+
+for(let i=0;i<120;i++){
+
+const star=document.createElement("div");
+
+star.innerHTML="✨";
+
+star.style.position="fixed";
+
+star.style.left=Math.random()*100+"vw";
+
+star.style.top=Math.random()*100+"vh";
+
+star.style.fontSize=(8+Math.random()*12)+"px";
+
+star.style.opacity=Math.random();
+
+star.style.animation="twinkle 2s infinite";
+
+document.body.appendChild(star);
+
+}
+
+}
+
+const style=document.createElement("style");
+
+style.innerHTML=`
+
+@keyframes twinkle{
+
+0%,100%{opacity:.2;}
+
+50%{opacity:1;}
+
+}
+
+`;
+
+document.head.appendChild(style);
+
+function toggleMusic(){
+
+const music=document.getElementById("bgm");
+
+if(music.paused){
+
+music.play();
+
+document.querySelector(".music").innerHTML="🔊 Music";
+
+}else{
+
+music.pause();
+
+document.querySelector(".music").innerHTML="🎵 Music";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
